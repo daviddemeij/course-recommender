@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, render_template
 import numpy as np
 import scipy.io as sio
 
@@ -75,6 +75,7 @@ def learn():
     print (ratings[3])
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
 app.secret_key = 'This is really unique and secret'
 
 @app.route('/')
@@ -97,9 +98,11 @@ def hello_person():
 
 
         """
+@app.route("/test")
+def index():
+    return render_template("main_page.html")
 
 @app.route('/greet', methods=['POST'])
-
 def greet():
     greeting = random.choice(["Hiya", "Hallo", "Hola", "Ola", "Salut", "Privet", "Konnichiwa", "Ni hao"])
     return """
