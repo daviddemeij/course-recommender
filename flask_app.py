@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template
 import numpy as np
 import scipy.io as sio
 
@@ -78,29 +78,36 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 app.secret_key = 'This is really unique and secret'
 
-@app.route('/')
-def hello_person():
-    course_ids = open("/home/daviddemeij/mysite/course_ids.txt", 'r')
-    text = ""
-    for course_name in course_ids:
-        text = text+("<tr><td>"+str(course_name)+"</td>\
-        <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"0\" checked></td>\
-        <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"1\" ></td>\
-        <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"2\" ></td>\
-        <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"3\" ></td>\
-        <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"4\" ></td>\
-        <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"5\" ></td>")
-    return """<form action="%s" method="POST"><table border=1><tr>
-        <td>Course name</td><td>N/A</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>""" % (url_for('greet'),) +text+"""
-         </table>
-   <input type="submit" value="Go!" />
-    </form>
+##@app.route('/')
+# def hello_person():
+#     course_ids = open("/home/daviddemeij/mysite/course_ids.txt", 'r')
+#     text = ""
+#     for course_name in course_ids:
+#         text = text+("<tr><td>"+str(course_name)+"</td>\
+#         <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"0\" checked></td>\
+#         <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"1\" ></td>\
+#         <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"2\" ></td>\
+#         <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"3\" ></td>\
+#         <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"4\" ></td>\
+#         <td><input type=\"radio\" name=\""+str(course_name).rstrip('\r\n')+"\" value=\"5\" ></td>")
+#     return """<form action="%s" method="POST"><table border=1><tr>
+#         <td>Course name</td><td>N/A</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>""" % (url_for('greet'),) +text+"""
+#          </table>
+#   <input type="submit" value="Go!" />
+#     </form>
 
 
-        """
-@app.route("/test")
+#         """
+course_ids = open("/home/daviddemeij/mysite/course_ids.txt", 'r')
+comments = []
+
+@app.route("/", methods = ['POST', 'GET'])
 def index():
-    return render_template("main_page.html")
+    if request.method == "GET":
+        return render_template("main_page.html", course_ids=course_ids)
+
+    comments.append(request.form["contents"])
+    return redirect(url_for('index'))
 
 @app.route('/greet', methods=['POST'])
 def greet():
