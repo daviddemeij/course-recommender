@@ -32,42 +32,19 @@
     <div class="main">
         <div class="container tim-container">
             <div class="tim-title">
-                <h1>Get your recommendation</h1>
-                <h3>Fill in a rating for courses that you have taken</h2>
+                <h1>Recommendation Systems</h1>
             </div>
 
 
 
-                <table class="table table-striped">
-                     <form id="recommendation" action="/recommend" method="POST" class="form-control">
-                    <tr>
-                    <th>Course name</th>
-                    <th>N/A</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    </tr>
-                {% for course in course_ids %}
-                <tr>
-                    <td>{{ course }}</td>
-                    <td><label class="radio"><input type="radio" name="{{ course }}" value="0" data-toggle="radio" checked></label></td>
-                    <td><label class="radio"><input type="radio" name="{{ course }}" value="1" data-toggle="radio"></label></td>
-                    <td><label class="radio"><input type="radio" name="{{ course }}" value="2" data-toggle="radio"></label></td>
-                    <td><label class="radio"><input type="radio" name="{{ course }}" value="3" data-toggle="radio"></label></td>
-                    <td><label class="radio"><input type="radio" name="{{ course }}" value="4" data-toggle="radio"></label></td>
-                    <td><label class="radio"><input type="radio" name="{{ course }}" value="5" data-toggle="radio"></label></td>
-                </tr>
-                {% endfor %}
-                </form>
-                </table>
             <div class="row">
 
                 <div class="col-md-6 col-md-offset-3 text-center">
 
                      <div class="actions">
-                         <button type="submit" form="recommendation" value="submit" class="btn btn-lg btn-warning btn-fill" >Get recommendation!</button>
+                         <a href="/movies" class="btn btn-lg btn-warning btn-fill" >Movie Recommendation System</a><br><br>
+
+                         <a href="/hmi-courses" class="btn btn-lg btn-warning btn-fill" >HMI Recommendation System</a>
                     </div>
                 </div>
             </div>'

@@ -39,7 +39,7 @@
 
 
                 <table class="table table-striped">
-                     <form id="recommendation" action="/recommend" method="POST" class="form-control">
+
                     <tr>
                     <th>Course name</th>
                     <th>Expected Rating</th>
@@ -51,14 +51,14 @@
                     <td>{{ rating }}</td>
                 </tr>
                 {% endfor %}
-                </form>
+
                 </table>
             <div class="row">
 
                 <div class="col-md-6 col-md-offset-3 text-center">
 
                      <div class="actions">
-                         <button type="submit" form="recommendation" value="submit" class="btn btn-lg btn-warning btn-fill" >Get recommendation!</button>
+                         <a href="{{ link }}" class="btn btn-lg btn-warning btn-fill" >Reset Recommendation</a>
                     </div>
                 </div>
             </div>'
